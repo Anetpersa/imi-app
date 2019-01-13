@@ -16,7 +16,7 @@
             <form class="form-horizontal" method="POST" action="dodaj-rezervaciju">
                 <c:if test="${hasErrors}">
                     <div class="alert alert-danger">
-                        <sf:errors path="*"></sf:errors>
+                        <errors path="*"></errors>
                         </div>
                 </c:if>
                 <div class="form-group">
@@ -45,7 +45,7 @@
                 </div>
                 <div class="form-group"> 
                     <div class="col-sm-offset-2 col-sm-10">
-                        <sf:button type="submit" class="btn btn-default">Rezervisi uredjaj</sf:button>
+                        <button type="submit" class="btn btn-default">Rezervisi uredjaj</button>
                         </div>
                     </div>
             </form>

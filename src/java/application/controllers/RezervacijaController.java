@@ -1,8 +1,8 @@
-
 package application.controllers;
 
 import application.models.RezervacijaModel;
 import application.services.RezervacijaService;
+import application.services.UredjajService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class RezervacijaController {
 
-    // TODO: Ovo da popravis jesi cula!
     @Autowired
     private RezervacijaService rezervacijaService;
 
@@ -28,25 +27,30 @@ public class RezervacijaController {
         this.rezervacijaService = rezervacijaService;
     }
 
+    @Autowired
+    private UredjajService uredjajService;
+
+    public UredjajService getUredjajService() {
+        return uredjajService;
+    }
+
+    public void setUredjajService(UredjajService uredjajService) {
+        this.uredjajService = uredjajService;
+    }
+
     @RequestMapping(value = "/dodaj-rezervaciju", method = RequestMethod.GET)
-    public String vratiStranicuZaDodavanjeRezervacije(Model model) {
-        
-        model.addAttribute("novaRezervacija", new RezervacijaModel());
+    public String vratiStranicuZaDodavanjeRezervacije() {
 
         return "dodaj-rezervaciju";
     }
 
     @RequestMapping(value = "/dodaj-rezervaciju", method = RequestMethod.POST)
-    public String dodajRezervaciju(@Valid @ModelAttribute("novaRezervacija") RezervacijaModel novaRezervacija,
-            BindingResult bindingResult, Model model) {
-
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("hasErrors", true);
-                        
-            return "dodaj-rezervaciju";
-        } else {
-            rezervacijaService.dodajRezervaciju(novaRezervacija);
+    public String dodajRezervaciju(@RequestParam(required = true) String imePrezime,
+            @RequestParam(required = true) String naziv,
+            @RequestParam(required = true) String datum,
+            @RequestParam(required = true) String parametar){
             
+
             return "redirect:/moje-rezervacije";
         }
 
@@ -55,54 +59,61 @@ public class RezervacijaController {
     @RequestMapping(value = "/lista-uredjaja-za-rezervisanje", method = RequestMethod.GET)
     public String listajUredjajeZaRezervisanje(Model model) {
 
-        model.addAttribute("listaUredjajaZaRezervisanje", rezervacijaService.listaRezervacija()); //TODO: vidi ovo
+        model.addAttribute("listaUredjajaZaRezervisanje", uredjajService.listaUredjaja());
 
         return "lista-uredjaja-za-rezervisanje";
     }
 
-    @RequestMapping("/promena-rezervacije")
-    public String promenaRezervacije(Model model, @RequestParam(required = true) Integer id) {
-        
-        model.addAttribute("promenjenaRezervacija", rezervacijaService.pronadjiRezervaciju(id));
-        
-        return "promeni-rezervaciju";
-        
+    @RequestMapping(value = "/lista-uredjaja-za-rezervisanje", method = RequestMethod.POST)
+    public String IzabranUredjajZaRezervisanje(Model model, @RequestParam(required = true) Integer id) {
+
+        model.addAttribute("naziv", uredjajService.pronadjiUredjaj(id).getNaziv());
+
+        return "redirect:/dodaj-rezervaciju";
+
     }
     
-  @RequestMapping(value = "/promeni-rezervaciju", method = RequestMethod.POST)
-   public String menjajRezervaciju(
+    @RequestMapping("/promena-rezervacije")
+    public String promenaRezervacije(Model model, @RequestParam(required = true) Integer id) {
+
+        model.addAttribute("promenjenaRezervacija", rezervacijaService.pronadjiRezervaciju(id));
+
+        return "promeni-rezervaciju";
+
+    }
+
+    @RequestMapping(value = "/promeni-rezervaciju", method = RequestMethod.POST)
+    public String menjajRezervaciju(
             @Valid @ModelAttribute("promenjenaRezervacija") RezervacijaModel promenjenaRezervacija,
             BindingResult bindingResult, Model model) {
-       
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("hasErrors", true);
-            
+
             return "promeni-rezervaciju";
         } else {
             rezervacijaService.promeniRezervaciju(promenjenaRezervacija);
-            
+
             return "redirect:/moje-rezervacije";
         }
     }
-   
-   @RequestMapping("/brisanje-rezervacije")
+
+    @RequestMapping("/brisanje-rezervacije")
     public String brisanjeRezervacije(Model model, @RequestParam(required = true) Integer id) {
-        
+
         model.addAttribute("obrisanaRezervacija", rezervacijaService.pronadjiRezervaciju(id));
-        
+
         return "obrisi-rezervaciju";
-        
+
     }
-    
+
     @RequestMapping(value = "/obrisi-rezervaciju", method = RequestMethod.POST)
-   public String obrisiRezervaciju(
+    public String obrisiRezervaciju(
             @Valid @ModelAttribute("obrisanIstrazivac") RezervacijaModel obrisanaRezervacija) {
-       
-            rezervacijaService.obrisiRezervaciju(obrisanaRezervacija);
-            
-            return "redirect:/moje-rezervacije";
+
+        rezervacijaService.obrisiRezervaciju(obrisanaRezervacija);
+
+        return "redirect:/moje-rezervacije";
     }
 
 }
-
-
