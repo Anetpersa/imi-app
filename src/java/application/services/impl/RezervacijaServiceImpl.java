@@ -28,7 +28,7 @@ public class RezervacijaServiceImpl implements RezervacijaService{
  
         if (novaRezervacija != null) {
             Rezervacija rezervacija = new Rezervacija(novaRezervacija.getNaziv(), novirezervacija.getLab());
-            if (novirezervacija.getNaziv() != null) {
+            if (nova Rezervacija.getNaziv() != null) {
                 rezervacija.setNaziv(novirezervacija.getNaziv());
             }
             rezervacijaDao.startSession();

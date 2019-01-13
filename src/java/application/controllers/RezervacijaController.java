@@ -2,6 +2,7 @@
 package application.controllers;
 
 import application.models.RezervacijaModel;
+import application.services.RezervacijaService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -95,7 +96,7 @@ public class RezervacijaController {
     
     @RequestMapping(value = "/obrisi-rezervaciju", method = RequestMethod.POST)
    public String obrisiRezervaciju(
-            @Valid @ModelAttribute("obrisanIstrazivac") RezervacijaModel obrisanarezervacija) {
+            @Valid @ModelAttribute("obrisanIstrazivac") RezervacijaModel obrisanaRezervacija) {
        
             rezervacijaService.obrisiRezervaciju(obrisanaRezervacija);
             

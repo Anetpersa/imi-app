@@ -33,7 +33,7 @@ public class RezervacijaDaoImpl implements RezervacijaDao {
             ts = session.beginTransaction();
             session.save(rezervacija);
             ts.commit();
-
+            
         } catch (HibernateException e) {
             if (ts != null) {
                 ts.rollback();
