@@ -13,42 +13,42 @@
         <div class="container">
             <h1>Dodaj rezervaciju</h1>
 
-            <form class="form-horizontal" method="POST" action="dodaj-rezervaciju">
+            <sf:form class="form-horizontal" method="POST" action="dodaj-rezervaciju" modelAttribute="novaRezervacija">
                 <c:if test="${hasErrors}">
                     <div class="alert alert-danger">
-                        <errors path="*"></errors>
+                        <sf:errors path="*"></sf:errors>
                         </div>
                 </c:if>
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="imePrezime">Ime i prezime:</label>
+                    <label class="control-label col-sm-2" for="idIstrazivaca">Id istrazivaca:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="imePrezime" name="imePrezime" placeholder="Upisite ime i prezime istrazivaca"/>
+                        <sf:input type="text" class="form-control" id="idIstrazivaca" path="idIstrazivaca" placeholder="Upisite id istrazivaca"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="naziv">Naziv uredjaja:</label>
+                    <label class="control-label col-sm-2" for="idUredjaja">Id uredjaja:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="naziv" name="naziv" readonly="true"/>
+                        <sf:input type="text" class="form-control" id="idUredjaja" path="idUredjaja" readonly="true"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="datum">Datum:</label>
                     <div class="col-sm-10">
-                        <input type="date" class="form-control" id="datum" name="datum" placeholder="Izaberite datum eksperimenta"/>
+                        <sf:input type="date" class="form-control" id="datum" path="datum"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="parametar">Parametar:</label>
+                    <label class="control-label col-sm-2" for="sifra">Parametar:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="parametar" name="parametar" placeholder="Upisite temperaturu, broj obrtaja..."/>
+                        <sf:input type="text" class="form-control" id="parametar" path="parametar" placeholder="Upisite temperaturu/broj ciklusa/obrtaja..."/>
                     </div>
                 </div>
                 <div class="form-group"> 
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">Rezervisi uredjaj</button>
+                        <sf:button type="submit" class="btn btn-default">Dodaj rezervaciju</sf:button>
                         </div>
                     </div>
-            </form>
+            </sf:form>
         </div>
     </body>
 </html>

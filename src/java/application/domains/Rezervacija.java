@@ -1,5 +1,6 @@
 package application.domains;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +16,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "rezervacija")
-public class Rezervacija {
+public class Rezervacija implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

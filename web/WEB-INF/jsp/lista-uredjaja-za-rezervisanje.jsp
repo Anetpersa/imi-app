@@ -22,7 +22,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${listaUredjaja}" var="uredjaj">
+                    <c:forEach items="${listaUredjajaZaRezervisanje}" var="uredjaj">
                         <tr>
                             <td>${uredjaj.id}</td>
                             <td>${uredjaj.naziv}</td>

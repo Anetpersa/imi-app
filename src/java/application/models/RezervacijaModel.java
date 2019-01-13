@@ -5,12 +5,14 @@ import java.util.Date;
 public class RezervacijaModel {
 
     private int id;
-    private Date datum;
+    private String datum;
     private IstrazivacModel istrazivacModel;
     private UredjajModel uredjajModel;
     private String parametar;
+    private int idIstrazivaca;
+    private int idUredjaja;
 
-    public RezervacijaModel(int id, Date datum, IstrazivacModel istrazivacModel, UredjajModel uredjajModel, String parametar) {
+    public RezervacijaModel(int id, String datum, IstrazivacModel istrazivacModel, UredjajModel uredjajModel, String parametar) {
         this.id = id;
         this.datum = datum;
         this.istrazivacModel = istrazivacModel;
@@ -18,7 +20,7 @@ public class RezervacijaModel {
         this.parametar = parametar;
     }
 
-    public RezervacijaModel(Date datum, IstrazivacModel istrazivacModel, UredjajModel uredjajModel, String parametar) {
+    public RezervacijaModel(String datum, IstrazivacModel istrazivacModel, UredjajModel uredjajModel, String parametar) {
         this.datum = datum;
         this.istrazivacModel = istrazivacModel;
         this.uredjajModel = uredjajModel;
@@ -26,6 +28,13 @@ public class RezervacijaModel {
     }
 
     public RezervacijaModel() {
+    }
+
+    public RezervacijaModel(String datum, String parametar, int idIstrazivaca, int idUredjaja) {
+        this.datum = datum;
+        this.parametar = parametar;
+        this.idIstrazivaca = idIstrazivaca;
+        this.idUredjaja = idUredjaja;
     }
 
     public int getId() {
@@ -36,11 +45,11 @@ public class RezervacijaModel {
         this.id = id;
     }
 
-    public Date getDatum() {
+    public String getDatum() {
         return datum;
     }
 
-    public void setDatum(Date datum) {
+    public void setDatum(String datum) {
         this.datum = datum;
     }
 
@@ -68,6 +77,20 @@ public class RezervacijaModel {
         this.parametar = parametar;
     }
 
-    
+    public int getIdIstrazivaca() {
+        return idIstrazivaca;
+    }
+
+    public void setIdIstrazivaca(int idIstrazivaca) {
+        this.idIstrazivaca = idIstrazivaca;
+    }
+
+    public int getIdUredjaja() {
+        return idUredjaja;
+    }
+
+    public void setIdUredjaja(int idUredjaja) {
+        this.idUredjaja = idUredjaja;
+    }
 
 }

@@ -3,6 +3,9 @@ package application.controllers;
 import application.models.RezervacijaModel;
 import application.services.RezervacijaService;
 import application.services.UredjajService;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,18 +42,28 @@ public class RezervacijaController {
     }
 
     @RequestMapping(value = "/dodaj-rezervaciju", method = RequestMethod.GET)
-    public String vratiStranicuZaDodavanjeRezervacije() {
+    public String vratiStranicuZaDodavanjeRezervacije(Model model) {
+        
+        model.addAttribute("novaRezervacija", new RezervacijaModel());
 
         return "dodaj-rezervaciju";
     }
-
+    
     @RequestMapping(value = "/dodaj-rezervaciju", method = RequestMethod.POST)
-    public String dodajRezervaciju(@RequestParam(required = true) String imePrezime,
-            @RequestParam(required = true) String naziv,
-            @RequestParam(required = true) String datum,
-            @RequestParam(required = true) String parametar){
-            
+    public String dodajRezervaciju(@Valid @ModelAttribute("novaRezervacija") RezervacijaModel novaRezervacija,
+            BindingResult bindingResult, Model model) {
 
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("hasErrors", true);
+                        
+            return "dodaj-rezervaciju";
+        } else {
+            try {
+                rezervacijaService.dodajRezervaciju(novaRezervacija);
+            } catch (ParseException ex) {
+                Logger.getLogger(RezervacijaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             return "redirect:/moje-rezervacije";
         }
 
@@ -67,10 +80,10 @@ public class RezervacijaController {
     @RequestMapping(value = "/lista-uredjaja-za-rezervisanje", method = RequestMethod.POST)
     public String IzabranUredjajZaRezervisanje(Model model, @RequestParam(required = true) Integer id) {
 
-        model.addAttribute("naziv", uredjajService.pronadjiUredjaj(id).getNaziv());
+        model.addAttribute("izabraniUredjaj", uredjajService.pronadjiUredjaj(id));
 
         return "redirect:/dodaj-rezervaciju";
-
+       
     }
     
     @RequestMapping("/promena-rezervacije")

@@ -1,17 +1,30 @@
-
 package application.services.impl;
 
+import application.dao.IstrazivacDao;
 import application.dao.RezervacijaDao;
+import application.dao.UredjajDao;
+import application.domains.Istrazivac;
 import application.domains.Rezervacija;
+import application.domains.Uredjaj;
+import application.models.IstrazivacModel;
 import application.models.RezervacijaModel;
+import application.models.UredjajModel;
+import application.services.IstrazivacService;
 import application.services.RezervacijaService;
+import application.services.UredjajService;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-public class RezervacijaServiceImpl implements RezervacijaService{
-    
-@Autowired
+public class RezervacijaServiceImpl implements RezervacijaService {
+
+    @Autowired
     RezervacijaDao rezervacijaDao;
 
     public RezervacijaDao getRezervacijaDao() {
@@ -22,17 +35,74 @@ public class RezervacijaServiceImpl implements RezervacijaService{
         this.rezervacijaDao = rezervacijaDao;
     }
 
+    @Autowired
+    IstrazivacDao istrazivacDao;
+
+    public IstrazivacDao getIstrazivacDao() {
+        return istrazivacDao;
+    }
+
+    public void setIstrazivacDao(IstrazivacDao istrazivacDao) {
+        this.istrazivacDao = istrazivacDao;
+    }
+
+    @Autowired
+    UredjajDao uredjajDao;
+
+    public UredjajDao getUredjajDao() {
+        return uredjajDao;
+    }
+
+    public void setUredjajDao(UredjajDao uredjajDao) {
+        this.uredjajDao = uredjajDao;
+    }
+
+    IstrazivacService istrazivacService;
+
+    public IstrazivacService getIstrazivacService() {
+        return istrazivacService;
+    }
+
+    public void setIstrazivacService(IstrazivacService istrazivacService) {
+        this.istrazivacService = istrazivacService;
+    }
+    
+    UredjajService uredjajService;
+
+    public UredjajService getUredjajService() {
+        return uredjajService;
+    }
+
+    public void setUredjajService(UredjajService uredjajService) {
+        this.uredjajService = uredjajService;
+    }
+       
+    @Override
+    public Date KonverzijaDatumaIzStringaUDate(String datum) throws ParseException {
+        String dateFormat = "yyyy-MM-dd";       //ovo mora da bude tacno ovako inace izbacuje januar uvek
+        SimpleDateFormat sdf1 = new SimpleDateFormat(dateFormat);
+
+        Date formattedDate = sdf1.parse(datum);
+        return formattedDate;
+    }
+
+    @Override
+    public String KonverzijaDatumaIzDateUString(Date datum) {
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDateString = sdf2.format(datum);
+        return currentDateString;
+    }
+
     @Override
     @Transactional
-    public boolean dodajRezervaciju(RezervacijaModel novaRezervacija) {
- 
+    public boolean dodajRezervaciju(RezervacijaModel novaRezervacija) throws ParseException {
+
         if (novaRezervacija != null) {
-            Rezervacija rezervacija = new Rezervacija(novaRezervacija.getNaziv(), novirezervacija.getLab());
-            if (nova Rezervacija.getNaziv() != null) {
-                rezervacija.setNaziv(novirezervacija.getNaziv());
-            }
+            Date parsiranDatum = KonverzijaDatumaIzStringaUDate(novaRezervacija.getDatum());
+            Rezervacija rezervacija = new Rezervacija(parsiranDatum, istrazivacDao.pronadjiIstrazivaca(novaRezervacija.getIdIstrazivaca()),
+                    uredjajDao.pronadjiUredjaj(novaRezervacija.getIdUredjaja()), novaRezervacija.getParametar());
             rezervacijaDao.startSession();
-            rezervacijaDao.dodajrezervacija(rezervacija);
+            rezervacijaDao.dodajRezervaciju(rezervacija);
             rezervacijaDao.stopSession();
             return true;
         } else {
@@ -41,49 +111,55 @@ public class RezervacijaServiceImpl implements RezervacijaService{
     }
 
     @Override
-    public List<rezervacijaModel> listarezervacijaa() {
+    public List<RezervacijaModel> listaRezervacija() {
 
-        List<rezervacijaModel> rezervacijaiModel = new ArrayList<>();
+        List<RezervacijaModel> rezervacijeModel = new ArrayList<>();
 
         rezervacijaDao.startSession();
-        List<rezervacija> rezervacijai = rezervacijaDao.listarezervacijaa();
+        List<Rezervacija> rezervacije = rezervacijaDao.listaRezervacija();
         rezervacijaDao.stopSession();
-        for (rezervacija rezervacija : rezervacijai) {
-            rezervacijaiModel.add(new rezervacijaModel(rezervacija.getId(), rezervacija.getNaziv(), rezervacija.getLab()));
+        for (Rezervacija rezervacija : rezervacije) {
+            rezervacijeModel.add(new RezervacijaModel(rezervacija.getId(), KonverzijaDatumaIzDateUString(rezervacija.getDatum()), 
+                    istrazivacService.pronadjiIstrazivaca(rezervacija.getId()), uredjajService.pronadjiUredjaj(rezervacija.getId()), rezervacija.getParametar()));
         }
-        return rezervacijaiModel;
+        return rezervacijeModel;
     }
 
     @Override
-    public rezervacijaModel pronadjirezervacija(int id) {
-        
+    public RezervacijaModel pronadjiRezervaciju(int id) {
+
         rezervacijaDao.startSession();
-        rezervacija rezervacija = rezervacijaDao.pronadjirezervacija(id);
-        
-        rezervacijaModel rezervacijaModel = new rezervacijaModel(rezervacija.getId(), rezervacija.getNaziv(), rezervacija.getLab());
+        Rezervacija rezervacija = rezervacijaDao.pronadjiRezervaciju(id);
+
+        RezervacijaModel rezervacijaModel = new RezervacijaModel(KonverzijaDatumaIzDateUString(rezervacija.getDatum()), 
+                rezervacija.getParametar(), rezervacija.getIstrazivac().getId(), rezervacija.getUredjaj().getId());
         rezervacijaDao.stopSession();
         return rezervacijaModel;
     }
 
     @Override
-    public void promenirezervacija(rezervacijaModel promenjenrezervacija) {
-        rezervacijaDao.startSession();
-        rezervacija rezervacija = rezervacijaDao.pronadjirezervacija(promenjenrezervacija.getId());
-        rezervacija.setNaziv(promenjenrezervacija.getNaziv());
-        rezervacija.setLab(promenjenrezervacija.getLab());
-                
-        if (promenjenrezervacija.getNaziv() != null) {
-            rezervacija.setNaziv(promenjenrezervacija.getNaziv());
+    public void promeniRezervaciju(RezervacijaModel promenjenaRezervacija) {
+        try {
+            rezervacijaDao.startSession();
+            Rezervacija rezervacija = rezervacijaDao.pronadjiRezervaciju(promenjenaRezervacija.getId());
+            rezervacija.setDatum(KonverzijaDatumaIzStringaUDate(promenjenaRezervacija.getDatum()));
+            rezervacija.setParametar(promenjenaRezervacija.getParametar());
+            
+            if (promenjenaRezervacija.getDatum()!= null) {
+                rezervacija.setDatum(KonverzijaDatumaIzStringaUDate(promenjenaRezervacija.getDatum()));
+            }
+            rezervacijaDao.promeniRezervaciju(rezervacija);
+            rezervacijaDao.stopSession();
+        } catch (ParseException ex) {
+            Logger.getLogger(RezervacijaServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        rezervacijaDao.promenirezervacija(rezervacija);
-        rezervacijaDao.stopSession();
     }
 
     @Override
-    public void obrisirezervacija(rezervacijaModel obrisanrezervacija) {
+    public void obrisiRezervaciju(RezervacijaModel obrisanaRezervacija) {
         rezervacijaDao.startSession();
-        rezervacija rezervacija = rezervacijaDao.pronadjirezervacija(obrisanrezervacija.getId());
-        rezervacijaDao.obrisirezervacija(rezervacija);
+        Rezervacija rezervacija = rezervacijaDao.pronadjiRezervaciju(obrisanaRezervacija.getId());
+        rezervacijaDao.obrisiRezervaciju(rezervacija);
         rezervacijaDao.stopSession();
     }
 
