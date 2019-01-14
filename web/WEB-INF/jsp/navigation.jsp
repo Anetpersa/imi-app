@@ -7,9 +7,11 @@
         <ul class="nav navbar-nav">
             <li id="home"><a href="home">Home</a></li>
             <li id="dodaj-istrazivaca"><a href="dodaj-istrazivaca">Dodaj istrazivaca</a></li>
-            <li id="lista-pasa"><a href="lista-istrazivaca">Lista istrazivaca</a></li>
-            <li id="lista-pasa"><a href="dodaj-uredjaj">Dodaj uredjaj</a></li>
-            <li id="lista-pasa"><a href="lista-uredjaja">Lista uredjaja</a></li>
-        </ul>
+            <li id="lista-istrazivaca"><a href="lista-istrazivaca">Lista istrazivaca</a></li>
+            <li id="dodaj-uredjaj"><a href="dodaj-uredjaj">Dodaj uredjaj</a></li>
+            <li id="lista-uredjaja"><a href="lista-uredjaja">Lista uredjaja</a></li>
+            <li id="lista-uredjaja-za-rezervisanje"><a href="lista-uredjaja-za-rezervisanje">Rezervisi uredjaj</a></li>
+            <li id="moje-rezervacije"><a href="moje-rezervacije">Moje rezervacije</a></li>
+                    </ul>
     </div>
 </nav>
