@@ -101,11 +101,18 @@ public class RezervacijaServiceImpl implements RezervacijaService {
     @Override
     @Transactional
     public boolean dodajRezervaciju(RezTranzModel novaRezervacija) throws ParseException {
-
-        if (novaRezervacija != null) {
-            Date parsiranDatum = KonverzijaDatumaIzStringaUDate(novaRezervacija.getDatum());
-            Rezervacija rezervacija = new Rezervacija(parsiranDatum, istrazivacDao.pronadjiIstrazivaca(novaRezervacija.getIdIstrazivaca()),
-                    uredjajDao.pronadjiUredjaj(novaRezervacija.getIdUredjaja()), novaRezervacija.getParametar());
+        // TODO: Potrudi se da startSession i stopSession radis direktno u metodama 
+        // koje su ti u DAO klasama, da ne bi morala da ih pozivas ovako svaki put
+        istrazivacDao.startSession();
+        uredjajDao.startSession();
+        Istrazivac istrazivac = istrazivacDao.pronadjiIstrazivaca(novaRezervacija.getIdIstrazivaca());
+        Uredjaj uredjaj = uredjajDao.pronadjiUredjaj(novaRezervacija.getIdUredjaja());
+        istrazivacDao.stopSession();
+        uredjajDao.stopSession();
+        if (novaRezervacija != null && istrazivac != null && uredjaj != null) {
+                Date parsiranDatum = KonverzijaDatumaIzStringaUDate(novaRezervacija.getDatum());            
+            
+            Rezervacija rezervacija = new Rezervacija(parsiranDatum, istrazivac, uredjaj, novaRezervacija.getParametar());
             rezervacijaDao.startSession();
             rezervacijaDao.dodajRezervaciju(rezervacija);
             rezervacijaDao.stopSession();
