@@ -9,8 +9,6 @@ public class RezervacijaModel {
     private IstrazivacModel istrazivacModel;
     private UredjajModel uredjajModel;
     private String parametar;
-    private int idIstrazivaca;
-    private int idUredjaja;
 
     public RezervacijaModel(int id, String datum, IstrazivacModel istrazivacModel, UredjajModel uredjajModel, String parametar) {
         this.id = id;
@@ -28,13 +26,6 @@ public class RezervacijaModel {
     }
 
     public RezervacijaModel() {
-    }
-
-    public RezervacijaModel(String datum, String parametar, int idIstrazivaca, int idUredjaja) {
-        this.datum = datum;
-        this.parametar = parametar;
-        this.idIstrazivaca = idIstrazivaca;
-        this.idUredjaja = idUredjaja;
     }
 
     public int getId() {
@@ -76,21 +67,6 @@ public class RezervacijaModel {
     public void setParametar(String parametar) {
         this.parametar = parametar;
     }
-
-    public int getIdIstrazivaca() {
-        return idIstrazivaca;
-    }
-
-    public void setIdIstrazivaca(int idIstrazivaca) {
-        this.idIstrazivaca = idIstrazivaca;
-    }
-
-    public int getIdUredjaja() {
-        return idUredjaja;
-    }
-
-    public void setIdUredjaja(int idUredjaja) {
-        this.idUredjaja = idUredjaja;
-    }
-
+   
+    
 }

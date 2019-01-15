@@ -28,7 +28,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="idUredjaja">Id uredjaja:</label>
                     <div class="col-sm-10">
-                        <sf:input type="text" class="form-control" id="idUredjaja" path="idUredjaja" readonly="true"/>
+                        <sf:input type="text" class="form-control" id="idUredjaja" path="idUredjaja" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -45,6 +45,7 @@
                 </div>
                 <div class="form-group"> 
                     <div class="col-sm-offset-2 col-sm-10">
+                         <sf:hidden path="idUredjaja"></sf:hidden>
                         <sf:button type="submit" class="btn btn-default">Dodaj rezervaciju</sf:button>
                         </div>
                     </div>

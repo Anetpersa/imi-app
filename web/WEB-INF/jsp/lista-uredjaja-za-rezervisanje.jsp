@@ -27,7 +27,7 @@
                             <td>${uredjaj.id}</td>
                             <td>${uredjaj.naziv}</td>
                             <td>${uredjaj.lab}</td>
-                            <td><a class="btn btn-default" href="dodaj-rezervaciju?id=${uredjaj.id}">Rezervisi <span class="glyphicon glyphicon-edit text-info"></span></a></td>
+                            <td><a class="btn btn-default" href="rezervisi-uredjaj?idUredjaja=${uredjaj.id}">Rezervisi <span class="glyphicon glyphicon-edit text-info"></span></a></td>
                         </tr>
                     </c:forEach>
                 </tbody>

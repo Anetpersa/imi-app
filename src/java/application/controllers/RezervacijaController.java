@@ -1,5 +1,6 @@
 package application.controllers;
 
+import application.models.RezTranzModel;
 import application.models.RezervacijaModel;
 import application.services.RezervacijaService;
 import application.services.UredjajService;
@@ -43,19 +44,19 @@ public class RezervacijaController {
 
     @RequestMapping(value = "/dodaj-rezervaciju", method = RequestMethod.GET)
     public String vratiStranicuZaDodavanjeRezervacije(Model model) {
-        
-        model.addAttribute("novaRezervacija", new RezervacijaModel());
+
+        model.addAttribute("novaRezervacija", new RezTranzModel());
 
         return "dodaj-rezervaciju";
     }
-    
+
     @RequestMapping(value = "/dodaj-rezervaciju", method = RequestMethod.POST)
-    public String dodajRezervaciju(@Valid @ModelAttribute("novaRezervacija") RezervacijaModel novaRezervacija,
+    public String dodajRezervaciju(@Valid @ModelAttribute("novaRezervacija") RezTranzModel novaRezervacija,
             BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("hasErrors", true);
-                        
+
             return "dodaj-rezervaciju";
         } else {
             try {
@@ -63,7 +64,7 @@ public class RezervacijaController {
             } catch (ParseException ex) {
                 Logger.getLogger(RezervacijaController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             return "redirect:/moje-rezervacije";
         }
 
@@ -77,15 +78,15 @@ public class RezervacijaController {
         return "lista-uredjaja-za-rezervisanje";
     }
 
-    @RequestMapping(value = "/lista-uredjaja-za-rezervisanje", method = RequestMethod.POST)
-    public String IzabranUredjajZaRezervisanje(Model model, @RequestParam(required = true) Integer id) {
+    @RequestMapping("/rezervisi-uredjaj")
+    public String promena(Model model, @RequestParam(required = true) Integer idUredjaja) {
 
-        model.addAttribute("izabraniUredjaj", uredjajService.pronadjiUredjaj(id));
+        model.addAttribute("novaRezervacija", uredjajService.pronadjiUredjaj(idUredjaja));
 
         return "redirect:/dodaj-rezervaciju";
-       
+
     }
-    
+
     @RequestMapping("/promena-rezervacije")
     public String promenaRezervacije(Model model, @RequestParam(required = true) Integer id) {
 

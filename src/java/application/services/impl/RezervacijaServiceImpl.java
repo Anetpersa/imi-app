@@ -7,6 +7,7 @@ import application.domains.Istrazivac;
 import application.domains.Rezervacija;
 import application.domains.Uredjaj;
 import application.models.IstrazivacModel;
+import application.models.RezTranzModel;
 import application.models.RezervacijaModel;
 import application.models.UredjajModel;
 import application.services.IstrazivacService;
@@ -59,6 +60,7 @@ public class RezervacijaServiceImpl implements RezervacijaService {
         this.uredjajDao = uredjajDao;
     }
 
+    @Autowired
     IstrazivacService istrazivacService;
 
     public IstrazivacService getIstrazivacService() {
@@ -68,7 +70,8 @@ public class RezervacijaServiceImpl implements RezervacijaService {
     public void setIstrazivacService(IstrazivacService istrazivacService) {
         this.istrazivacService = istrazivacService;
     }
-    
+
+    @Autowired
     UredjajService uredjajService;
 
     public UredjajService getUredjajService() {
@@ -78,7 +81,7 @@ public class RezervacijaServiceImpl implements RezervacijaService {
     public void setUredjajService(UredjajService uredjajService) {
         this.uredjajService = uredjajService;
     }
-       
+
     @Override
     public Date KonverzijaDatumaIzStringaUDate(String datum) throws ParseException {
         String dateFormat = "yyyy-MM-dd";       //ovo mora da bude tacno ovako inace izbacuje januar uvek
@@ -97,7 +100,7 @@ public class RezervacijaServiceImpl implements RezervacijaService {
 
     @Override
     @Transactional
-    public boolean dodajRezervaciju(RezervacijaModel novaRezervacija) throws ParseException {
+    public boolean dodajRezervaciju(RezTranzModel novaRezervacija) throws ParseException {
 
         if (novaRezervacija != null) {
             Date parsiranDatum = KonverzijaDatumaIzStringaUDate(novaRezervacija.getDatum());
@@ -121,7 +124,7 @@ public class RezervacijaServiceImpl implements RezervacijaService {
         List<Rezervacija> rezervacije = rezervacijaDao.listaRezervacija();
         rezervacijaDao.stopSession();
         for (Rezervacija rezervacija : rezervacije) {
-            rezervacijeModel.add(new RezervacijaModel(rezervacija.getId(), KonverzijaDatumaIzDateUString(rezervacija.getDatum()), 
+            rezervacijeModel.add(new RezervacijaModel(rezervacija.getId(), KonverzijaDatumaIzDateUString(rezervacija.getDatum()),
                     istrazivacService.pronadjiIstrazivaca(rezervacija.getId()), uredjajService.pronadjiUredjaj(rezervacija.getId()), rezervacija.getParametar()));
         }
         return rezervacijeModel;
@@ -133,8 +136,8 @@ public class RezervacijaServiceImpl implements RezervacijaService {
         rezervacijaDao.startSession();
         Rezervacija rezervacija = rezervacijaDao.pronadjiRezervaciju(id);
 
-        RezervacijaModel rezervacijaModel = new RezervacijaModel(KonverzijaDatumaIzDateUString(rezervacija.getDatum()), 
-                rezervacija.getParametar(), rezervacija.getIstrazivac().getId(), rezervacija.getUredjaj().getId());
+        RezervacijaModel rezervacijaModel = new RezervacijaModel(KonverzijaDatumaIzDateUString(rezervacija.getDatum()),
+                istrazivacService.pronadjiIstrazivaca(rezervacija.getId()), uredjajService.pronadjiUredjaj(rezervacija.getId()), rezervacija.getParametar());
         rezervacijaDao.stopSession();
         return rezervacijaModel;
     }
@@ -146,8 +149,8 @@ public class RezervacijaServiceImpl implements RezervacijaService {
             Rezervacija rezervacija = rezervacijaDao.pronadjiRezervaciju(promenjenaRezervacija.getId());
             rezervacija.setDatum(KonverzijaDatumaIzStringaUDate(promenjenaRezervacija.getDatum()));
             rezervacija.setParametar(promenjenaRezervacija.getParametar());
-            
-            if (promenjenaRezervacija.getDatum()!= null) {
+
+            if (promenjenaRezervacija.getDatum() != null) {
                 rezervacija.setDatum(KonverzijaDatumaIzStringaUDate(promenjenaRezervacija.getDatum()));
             }
             rezervacijaDao.promeniRezervaciju(rezervacija);

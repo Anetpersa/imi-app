@@ -1,8 +1,7 @@
 
 package application.services;
 
-import application.domains.Istrazivac;
-import application.domains.Uredjaj;
+import application.models.RezTranzModel;
 import application.models.RezervacijaModel;
 import java.text.ParseException;
 import java.util.Date;
@@ -13,7 +12,7 @@ public interface RezervacijaService {
     
     public String KonverzijaDatumaIzDateUString(Date datum);
     
-    public boolean dodajRezervaciju(RezervacijaModel novaRezervacija) throws ParseException;
+    public boolean dodajRezervaciju(RezTranzModel novaRezervacija) throws ParseException;
     
     public List<RezervacijaModel> listaRezervacija();
     
