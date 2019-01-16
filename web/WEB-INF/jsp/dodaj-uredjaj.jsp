@@ -12,7 +12,6 @@
         <%@include file="navigation.jsp" %>
         <div class="container">
             <h1>Dodaj uredjaj</h1>
-
             <sf:form class="form-horizontal" method="POST" action="dodaj-uredjaj" modelAttribute="noviUredjaj">
                 <c:if test="${hasErrors}">
                     <div class="alert alert-danger">

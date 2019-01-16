@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="sf"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix = "sf" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,13 +12,12 @@
         <%@include file="navigation.jsp" %>
         <div class="container">
             <h1>Dodaj istrazivaca</h1>
-
             <sf:form class="form-horizontal" method="POST" action="dodaj-istrazivaca" modelAttribute="noviIstrazivac">
                 <c:if test="${hasErrors}">
-                    <div class="alert alert-danger">
-                        <sf:errors path="*"></sf:errors>
-                        </div>
-                </c:if>
+                <div class="alert alert-danger">
+                    <sf:errors path="*"></sf:errors>
+                    </div>
+            </c:if>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="imePrezime">Ime i prezime:</label>
                     <div class="col-sm-10">
