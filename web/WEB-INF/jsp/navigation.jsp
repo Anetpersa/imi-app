@@ -1,4 +1,9 @@
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
+<c:if test="${pageContext.request.userPrincipal.name !=null}">
+    <h2>Dobrodosao, ${pageContext.request.userPrincipal.name}
+    <a href="login?logout">Izloguj se</a> </h2>
+</c:if>
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
