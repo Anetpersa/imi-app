@@ -9,7 +9,9 @@
         <%@include file="header.jsp" %>
     </head>
     <body>
+       <div class="container">
         <%@include file="navigation.jsp" %>
+        </div>
         <div class="container">
             <h1>Dodaj uredjaj</h1>
             <sf:form class="form-horizontal" method="POST" action="dodaj-uredjaj" modelAttribute="noviUredjaj">

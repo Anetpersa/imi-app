@@ -8,8 +8,9 @@
         <%@include file="header.jsp" %>
     </head>
     <body>
+        <div class="container">
         <%@include file="navigation.jsp" %>
-
+        </div>
         <div class="container">
             <h1>Lista istrazivaca</h1>
             <table class="table table-bordered table-striped">

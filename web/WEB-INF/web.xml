@@ -24,9 +24,9 @@
             30
         </session-timeout>
     </session-config>
-    <welcome-file-list>
+<!--    <welcome-file-list>
         <welcome-file>home</welcome-file>
-    </welcome-file-list>
+    </welcome-file-list>-->
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>

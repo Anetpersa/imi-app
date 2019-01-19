@@ -9,7 +9,9 @@
         <%@include file="header.jsp" %>
     </head>
     <body>
+        <div class="container">
         <%@include file="navigation.jsp" %>
+        </div>
         <div class="container">
             <h1>Promeni istrazivaca</h1>
 
