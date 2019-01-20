@@ -43,9 +43,9 @@ public class RezervacijaController {
     }
 
     @RequestMapping(value = "/dodaj-rezervaciju", method = RequestMethod.GET)
-    public String vratiStranicuZaDodavanjeRezervacije(Model model) {
+    public String vratiStranicuZaDodavanjeRezervacije(@ModelAttribute("novaRezervacija") RezTranzModel novaRezervacija, Model model) {
 
-        model.addAttribute("novaRezervacija", new RezTranzModel());
+        model.addAttribute("novaRezervacija", novaRezervacija);
 
         return "dodaj-rezervaciju";
     }
@@ -80,10 +80,10 @@ public class RezervacijaController {
 
     @RequestMapping("/rezervisi-uredjaj")
     public String promena(Model model, @RequestParam(required = true) Integer idUredjaja) {
+        RezTranzModel novaRezervacija = new RezTranzModel(idUredjaja);
+        model.addAttribute("novaRezervacija", novaRezervacija);
 
-        model.addAttribute("novaRezervacija", uredjajService.pronadjiUredjaj(idUredjaja));
-
-        return "redirect:/dodaj-rezervaciju";
+        return "dodaj-rezervaciju";
 
     }
 

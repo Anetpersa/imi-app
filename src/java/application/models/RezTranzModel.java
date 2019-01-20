@@ -1,7 +1,7 @@
-
 package application.models;
 
 public class RezTranzModel {
+
     private Integer idIstrazivaca;
     private Integer idUredjaja;
     private String parametar;
@@ -12,6 +12,10 @@ public class RezTranzModel {
         this.idUredjaja = idUredjaja;
         this.parametar = parametar;
         this.datum = datum;
+    }
+
+    public RezTranzModel(Integer idUredjaja) {
+        this.idUredjaja = idUredjaja;
     }
 
     public RezTranzModel() {
@@ -48,7 +52,5 @@ public class RezTranzModel {
     public void setDatum(String datum) {
         this.datum = datum;
     }
-
-    
 
 }
