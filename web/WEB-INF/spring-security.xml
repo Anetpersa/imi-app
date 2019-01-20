@@ -9,13 +9,18 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
         <security:intercept-url pattern="/dodaj-istrazivaca**" access="hasRole('ROLE_ADMIN')"></security:intercept-url>
         <security:intercept-url pattern="/dodaj-uredjaj**" access="hasRole('ROLE_ADMIN')"></security:intercept-url>
         <security:intercept-url pattern="/lista-istrazivaca**" access="hasRole('ROLE_ADMIN')"></security:intercept-url>
-        <security:intercept-url pattern="/lista-uredjaja**" access="hasRole('ROLE_ADMIN')"></security:intercept-url>
+        <security:intercept-url pattern="/lista-uredjaja" access="hasRole('ROLE_ADMIN')"></security:intercept-url>
+        <security:intercept-url pattern="/lista-uredjaja-za-rezervisanje" access="hasRole('ROLE_USER')"></security:intercept-url>
+        <security:intercept-url pattern="/moje-rezervacije" access="hasRole('ROLE_USER')"></security:intercept-url>
     </security:http>    
    
     <security:authentication-manager>
         <security:authentication-provider>
             <security:user-service>
                 <security:user name="admin" password="12345" authorities="ROLE_ADMIN" />
+                <security:user name="Ana" password="Anetpersa" authorities="ROLE_USER" />
+                <security:user name="Hris" password="Hris123" authorities="ROLE_USER" />
+                <security:user name="Vesna" password="prolece011" authorities="ROLE_USER" />
             </security:user-service>
         </security:authentication-provider>
     </security:authentication-manager>
