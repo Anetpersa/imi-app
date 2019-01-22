@@ -10,16 +10,16 @@
     </head>
     <body>
         <div class="container">
-        <%@include file="navigation.jsp" %>
+            <%@include file="navigation.jsp" %>
         </div>
         <div class="container">
             <h1>Dodaj istrazivaca</h1>
             <sf:form class="form-horizontal" method="POST" action="dodaj-istrazivaca" modelAttribute="noviIstrazivac">
                 <c:if test="${hasErrors}">
-                <div class="alert alert-danger">
-                    <sf:errors path="*"></sf:errors>
-                    </div>
-            </c:if>
+                    <div class="alert alert-danger">
+                        <sf:errors path="*"></sf:errors>
+                        </div>
+                </c:if>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="imePrezime">Ime i prezime:</label>
                     <div class="col-sm-10">

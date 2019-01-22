@@ -37,7 +37,7 @@
                         <li class="nav-item">
                             <a class="nav-link active" href="lista-uredjaja-za-rezervisanje">Rezervisi uredjaj</a></li>
                         <li class="nav-item">
-                            <a class="nav-link" href="moje-rezervacije">Moje rezervacije</a></li>
+                            <a class="nav-link" href="lista-rezervacija">Lista rezervacija</a></li>
                     </ul>
                 </div>
         </div>

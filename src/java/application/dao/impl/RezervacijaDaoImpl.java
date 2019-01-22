@@ -52,7 +52,7 @@ public class RezervacijaDaoImpl implements RezervacijaDao {
         List<Rezervacija> rezervacije = new ArrayList<>();
         try {
             ts = session.beginTransaction();
-            Query query = session.createQuery("FROM Uredjaj");
+            Query query = session.createQuery("FROM Rezervacija");
             for (Object o : query.list()) {
                 rezervacije.add((Rezervacija) o);
             }

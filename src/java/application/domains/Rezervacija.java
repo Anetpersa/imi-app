@@ -26,12 +26,12 @@ public class Rezervacija implements Serializable {
     @Column(name = "datum")
     private Date datum;
 
-   @ManyToOne(fetch = FetchType.LAZY)
+   @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_istrazivaca")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Istrazivac istrazivac; 
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_uredjaja")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Uredjaj uredjaj;

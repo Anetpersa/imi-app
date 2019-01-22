@@ -65,7 +65,7 @@ public class RezervacijaController {
                 Logger.getLogger(RezervacijaController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            return "redirect:/moje-rezervacije";
+            return "redirect:/lista-rezervacija";
         }
 
     }
@@ -84,9 +84,16 @@ public class RezervacijaController {
         model.addAttribute("novaRezervacija", novaRezervacija);
 
         return "dodaj-rezervaciju";
-
     }
 
+    @RequestMapping(value = "/lista-rezervacija", method = RequestMethod.GET)
+    public String listajRezervacija(Model model) {
+
+        model.addAttribute("listaRezervacija", rezervacijaService.listaRezervacija());
+
+        return "lista-rezervacija";
+    }
+    
     @RequestMapping("/promena-rezervacije")
     public String promenaRezervacije(Model model, @RequestParam(required = true) Integer id) {
 
@@ -108,7 +115,7 @@ public class RezervacijaController {
         } else {
             rezervacijaService.promeniRezervaciju(promenjenaRezervacija);
 
-            return "redirect:/moje-rezervacije";
+            return "redirect:/lista-rezervacija";
         }
     }
 
@@ -127,7 +134,7 @@ public class RezervacijaController {
 
         rezervacijaService.obrisiRezervaciju(obrisanaRezervacija);
 
-        return "redirect:/moje-rezervacije";
+        return "redirect:/lista-rezervacija";
     }
 
 }

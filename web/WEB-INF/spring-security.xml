@@ -11,7 +11,7 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
         <security:intercept-url pattern="/lista-istrazivaca**" access="hasRole('ROLE_ADMIN')"></security:intercept-url>
         <security:intercept-url pattern="/lista-uredjaja" access="hasRole('ROLE_ADMIN')"></security:intercept-url>
         <security:intercept-url pattern="/lista-uredjaja-za-rezervisanje" access="hasRole('ROLE_USER')"></security:intercept-url>
-        <security:intercept-url pattern="/moje-rezervacije" access="hasRole('ROLE_USER')"></security:intercept-url>
+        <security:intercept-url pattern="/lista-rezervacija" access="hasRole('ROLE_USER')"></security:intercept-url>
     </security:http>    
    
     <security:authentication-manager>

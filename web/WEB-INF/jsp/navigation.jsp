@@ -16,7 +16,7 @@
             <li id="dodaj-uredjaj"><a href="dodaj-uredjaj">Dodaj uredjaj</a></li>
             <li id="lista-uredjaja"><a href="lista-uredjaja">Lista uredjaja</a></li>
             <li id="lista-uredjaja-za-rezervisanje"><a href="lista-uredjaja-za-rezervisanje">Rezervisi uredjaj</a></li>
-            <li id="moje-rezervacije"><a href="moje-rezervacije">Moje rezervacije</a></li>
+            <li id="lista-rezervacija"><a href="lista-rezervacija">Lista rezervacija</a></li>
                     </ul>
     </div>
 </nav>
