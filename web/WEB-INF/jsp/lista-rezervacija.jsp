@@ -30,8 +30,8 @@
                             <td>${rezervacija.uredjajModel.naziv}</td>
                             <td>${rezervacija.datum}</td>
                             <td>${rezervacija.parametar}</td>
-                            <td><a class="btn btn-default" href="promena-rezervacije?id=${rezervacija.id}">Promeni <span class="glyphicon glyphicon-edit text-info"></span></a></td>
-                            <td><a class="btn btn-default" href="brisanje-rezervacije?id=${rezervacija.id}">Obrisi <span class="glyphicon glyphicon-trash text-danger"></span></a></td>
+                            <td><a class="btn btn-default" href="promena-rezervacije?id=${rezervacija.uredjajModel.id}">Promeni <span class="glyphicon glyphicon-edit text-info"></span></a></td>
+                            <td><a class="btn btn-default" href="brisanje-rezervacije?id=${rezervacija.uredjajModel.id}">Obrisi <span class="glyphicon glyphicon-trash text-danger"></span></a></td>
                         </tr>
                     </c:forEach>
                 </tbody>

@@ -18,7 +18,7 @@ public interface RezervacijaService {
     
     public RezervacijaModel pronadjiRezervaciju(int id);
 
-    public void promeniRezervaciju(RezervacijaModel promenjenaRezervacija);
+    public void promeniRezervaciju(RezTranzModel promenjenaRezervacija);
 
     public void obrisiRezervaciju(RezervacijaModel obrisanaRezervacija); 
 }

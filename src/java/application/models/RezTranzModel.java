@@ -2,6 +2,7 @@ package application.models;
 
 public class RezTranzModel {
 
+    private Integer id;
     private Integer idIstrazivaca;
     private Integer idUredjaja;
     private String parametar;
@@ -19,6 +20,14 @@ public class RezTranzModel {
     }
 
     public RezTranzModel() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getIdIstrazivaca() {
@@ -53,4 +62,5 @@ public class RezTranzModel {
         this.datum = datum;
     }
 
+    
 }

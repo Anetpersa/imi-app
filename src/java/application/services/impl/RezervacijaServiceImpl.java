@@ -6,10 +6,8 @@ import application.dao.UredjajDao;
 import application.domains.Istrazivac;
 import application.domains.Rezervacija;
 import application.domains.Uredjaj;
-import application.models.IstrazivacModel;
 import application.models.RezTranzModel;
 import application.models.RezervacijaModel;
-import application.models.UredjajModel;
 import application.services.IstrazivacService;
 import application.services.RezervacijaService;
 import application.services.UredjajService;
@@ -149,7 +147,7 @@ public class RezervacijaServiceImpl implements RezervacijaService {
     }
 
     @Override
-    public void promeniRezervaciju(RezervacijaModel promenjenaRezervacija) {
+    public void promeniRezervaciju(RezTranzModel promenjenaRezervacija) {
         try {
             rezervacijaDao.startSession();
             Rezervacija rezervacija = rezervacijaDao.pronadjiRezervaciju(promenjenaRezervacija.getId());

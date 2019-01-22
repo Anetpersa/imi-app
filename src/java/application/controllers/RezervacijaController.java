@@ -97,7 +97,8 @@ public class RezervacijaController {
     @RequestMapping("/promena-rezervacije")
     public String promenaRezervacije(Model model, @RequestParam(required = true) Integer id) {
 
-        model.addAttribute("promenjenaRezervacija", rezervacijaService.pronadjiRezervaciju(id));
+        RezTranzModel promenjenaRezervacija = new RezTranzModel(id);
+        model.addAttribute("promenjenaRezervacija", promenjenaRezervacija);
 
         return "promeni-rezervaciju";
 
@@ -105,7 +106,7 @@ public class RezervacijaController {
 
     @RequestMapping(value = "/promeni-rezervaciju", method = RequestMethod.POST)
     public String menjajRezervaciju(
-            @Valid @ModelAttribute("promenjenaRezervacija") RezervacijaModel promenjenaRezervacija,
+            @Valid @ModelAttribute("promenjenaRezervacija") RezTranzModel promenjenaRezervacija,
             BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
