@@ -1,5 +1,7 @@
 package application.models;
 
+import java.text.SimpleDateFormat;
+
 public class RezTranzModel {
 
     private Integer id;
@@ -20,6 +22,14 @@ public class RezTranzModel {
     }
 
     public RezTranzModel() {
+    }
+    
+    public RezTranzModel(RezervacijaModel rezervacija) {
+        this.id = rezervacija.getId();
+        this.idIstrazivaca = rezervacija.getIstrazivacModel().getId();
+        this.idUredjaja = rezervacija.getUredjajModel().getId();
+        this.parametar = rezervacija.getParametar();
+        this.datum = rezervacija.getDatum();
     }
 
     public Integer getId() {
