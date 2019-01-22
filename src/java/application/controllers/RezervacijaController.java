@@ -129,7 +129,7 @@ public class RezervacijaController {
 
     @RequestMapping(value = "/obrisi-rezervaciju", method = RequestMethod.POST)
     public String obrisiRezervaciju(
-            @Valid @ModelAttribute("obrisanIstrazivac") RezervacijaModel obrisanaRezervacija) {
+            @Valid @ModelAttribute("obrisanaRezervacija") RezervacijaModel obrisanaRezervacija) {
 
         rezervacijaService.obrisiRezervaciju(obrisanaRezervacija);
 

@@ -25,7 +25,6 @@
                 </thead>
                 <tbody>
                     <c:forEach items="${listaRezervacija}" var="rezervacija">
-                        <c:out value="${rezervacija.id}"/>
                         <tr>
                             <td>${rezervacija.istrazivacModel.imePrezime}</td>
                             <td>${rezervacija.uredjajModel.naziv}</td>
