@@ -10,4 +10,9 @@ public class GeneralController {
     public String home() {
         return "index";
     }
+    
+    @RequestMapping("/403")
+    public String odbijenPristup() {
+        return "/403";
+    }
 }
