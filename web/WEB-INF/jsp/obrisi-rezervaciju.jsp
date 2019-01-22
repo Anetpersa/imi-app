@@ -16,17 +16,17 @@
             <h1>Obrisi rezervaciju</h1>
 
             <h3 class="text-danger">Da li ste sigurni da zelite da obrisete ovu rezervaciju?</h3>
-            <sf:form class="form-horizontal" method="POST" action="brisi-rezervaciju" modelAttribute="obrisanaRezervacija">
+            <sf:form class="form-horizontal" method="POST" action="obrisi-rezervaciju" modelAttribute="obrisanaRezervacija">
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="imePrezime">Ime i prezime istrazivaca:</label>
+                    <label class="control-label col-sm-2" for="istrazivacModel.imePrezime">Ime i prezime istrazivaca:</label>
                     <div class="col-sm-10">
-                        <sf:input type="text" class="form-control" id="imePrezime" path="imePrezime" readonly="true"/>
+                        <sf:input type="text" class="form-control" id="istrazivacModel.imePrezime" path="istrazivacModel.imePrezime" readonly="true"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="naziv">Naziv uredjaja:</label>
+                    <label class="control-label col-sm-2" for="uredjajModel.naziv">Naziv uredjaja:</label>
                     <div class="col-sm-10">
-                        <sf:input type="text" class="form-control" id="naziv" path="naziv" readonly="true"/>
+                        <sf:input type="text" class="form-control" id="uredjajModel.naziv" path="uredjajModel.naziv" readonly="true"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -45,7 +45,7 @@
                     <div class="col-sm-offset-2 col-sm-10">
                         <sf:hidden path="id"></sf:hidden>
                         <sf:button type="submit" class="btn btn-danger">Obrisi rezervaciju</sf:button>
-                            <a class="btn btn-default" href="moje-rezervacije">Vrati se na moj raspored</a>
+                            <a class="btn btn-default" href="lista-rezervacija">Vrati se na moj raspored</a>
                         </div>
                     </div>
                 </div>

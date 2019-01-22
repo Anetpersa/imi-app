@@ -140,8 +140,13 @@ public class RezervacijaServiceImpl implements RezervacijaService {
         rezervacijaDao.startSession();
         Rezervacija rezervacija = rezervacijaDao.pronadjiRezervaciju(id);
 
-        RezervacijaModel rezervacijaModel = new RezervacijaModel(KonverzijaDatumaIzDateUString(rezervacija.getDatum()),
-                istrazivacService.pronadjiIstrazivaca(rezervacija.getId()), uredjajService.pronadjiUredjaj(rezervacija.getId()), rezervacija.getParametar());
+        RezervacijaModel rezervacijaModel = new RezervacijaModel(
+                rezervacija.getId(),
+                KonverzijaDatumaIzDateUString(rezervacija.getDatum()),
+                istrazivacService.pronadjiIstrazivaca(rezervacija.getIstrazivac().getId()),
+                uredjajService.pronadjiUredjaj(rezervacija.getUredjaj().getId()),
+                rezervacija.getParametar()
+        );
         rezervacijaDao.stopSession();
         return rezervacijaModel;
     }
